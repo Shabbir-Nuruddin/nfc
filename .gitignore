@@ -5,7 +5,6 @@ node_modules/
 .impeccable/review/
 .impeccable/hook.cache.json
 
-# Third-party recordings and page scans: not published until permission is in hand.
-# Keep them locally in 10_Website/site/public/media. The pages.json timings are tracked.
+# Third-party recordings: not published until permission is in hand or replaced
+# with our own. Keep them locally in 10_Website/site/public/media.
 10_Website/site/public/media/*.m4a
-10_Website/site/public/media/*/*.webp
