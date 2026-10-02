@@ -1,0 +1,6 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    { "name": "nfc-dua", "runtimeExecutable": "npm", "runtimeArgs": ["--prefix", "10_Website/site", "run", "dev"], "port": 3100 }
+  ]
+}

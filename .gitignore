@@ -1,0 +1,11 @@
+node_modules/
+.next/
+*.tsbuildinfo
+.env*
+.impeccable/review/
+.impeccable/hook.cache.json
+
+# Third-party recordings and page scans: not published until permission is in hand.
+# Keep them locally in 10_Website/site/public/media. The pages.json timings are tracked.
+10_Website/site/public/media/*.m4a
+10_Website/site/public/media/*/*.webp

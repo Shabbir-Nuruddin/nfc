@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+/* From the design sheets: ivory and cream grounds, warm brown, gold line work, deep green. */
+@theme {
+  --color-ivory: #f3ede2;
+  --color-paper: #f9f5ed;
+  --color-sand: #e7ddcc;
+  --color-sand-2: #d8cab3;
+  --color-umber: #24180f;
+  --color-umber-2: #362517;
+  --color-umber-3: #4a3421;
+  --color-bark: #6a5038;
+  --color-ink: #2a2017;
+  --color-gold: #ab812f;
+  --color-gold-deep: #85621f;
+  --color-gold-bright: #d0aa5a;
+  --color-leaf: #1f3b2b;
+  --color-leaf-2: #2b4f3a;
+
+  --font-display: var(--font-cinzel), "Cinzel", serif;
+  --font-serif: var(--font-cormorant), "Cormorant Garamond", serif;
+  --font-sans: var(--font-jost), "Jost", system-ui, sans-serif;
+  --font-arabic: var(--font-amiri), "Amiri", serif;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:root {
+  color-scheme: light;
+  --focus: var(--color-leaf);
+}
+
+html {
+  background: var(--color-ivory);
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-ivory);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-gold-bright);
+  color: var(--color-umber);
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+
+a {
+  text-underline-offset: 0.22em;
+  text-decoration-thickness: 1px;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+.arabic {
+  font-family: var(--font-arabic);
+  direction: rtl;
+}
+
+/* Spaced capitals, as on the sheets' labels. */
+.caps {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+/*
+ * Star-and-cross strapwork as a ground, the same pattern as the tag's pierced field.
+ * Drawn in currentColor through a mask, so each band picks its own line colour.
+ */
+.lattice {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-color: currentColor;
+  -webkit-mask: url("/lattice.svg") 0 0 / 108px 108px repeat;
+  mask: url("/lattice.svg") 0 0 / 108px 108px repeat;
+}
+
+details > summary {
+  list-style: none;
+  cursor: pointer;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+input[type="range"] {
+  accent-color: var(--color-gold);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

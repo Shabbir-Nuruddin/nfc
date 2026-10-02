@@ -1,0 +1,172 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-02T00:00:00Z",
+  "title": "Design System: NFC Dua",
+  "extensions": {
+    "colorMeta": {
+      "gold": {
+        "role": "primary",
+        "displayName": "Gold",
+        "canonical": "#ab812f"
+      },
+      "gold-deep": {
+        "role": "primary",
+        "displayName": "Deep Gold",
+        "canonical": "#85621f"
+      },
+      "gold-bright": {
+        "role": "primary",
+        "displayName": "Bright Gold",
+        "canonical": "#d0aa5a"
+      },
+      "ivory": {
+        "role": "neutral",
+        "displayName": "Ivory",
+        "canonical": "#f3ede2"
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "canonical": "#f9f5ed"
+      },
+      "sand": {
+        "role": "neutral",
+        "displayName": "Sand",
+        "canonical": "#e7ddcc"
+      },
+      "sand-2": {
+        "role": "neutral",
+        "displayName": "Sand Hairline",
+        "canonical": "#d8cab3"
+      },
+      "umber": {
+        "role": "neutral",
+        "displayName": "Umber",
+        "canonical": "#24180f"
+      },
+      "umber-2": {
+        "role": "neutral",
+        "displayName": "Umber 2",
+        "canonical": "#362517"
+      },
+      "umber-3": {
+        "role": "neutral",
+        "displayName": "Umber 3",
+        "canonical": "#4a3421"
+      },
+      "bark": {
+        "role": "neutral",
+        "displayName": "Bark",
+        "canonical": "#6a5038"
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#2a2017"
+      },
+      "leaf": {
+        "role": "secondary",
+        "displayName": "Leaf (focus only)",
+        "canonical": "#1f3b2b"
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "family": "Cinzel",
+        "use": "hero h1"
+      },
+      "headline": {
+        "family": "Cinzel",
+        "use": "band headings"
+      },
+      "title": {
+        "family": "Cormorant Garamond",
+        "use": "list terms, italic subtitle"
+      },
+      "body": {
+        "family": "Jost",
+        "use": "copy"
+      },
+      "label": {
+        "family": "Jost",
+        "use": "chips, captions"
+      },
+      "caps": {
+        "family": "Cinzel",
+        "use": "legends, player labels"
+      },
+      "arabic": {
+        "family": "Amiri",
+        "use": "verified dua titles and دعاء"
+      }
+    },
+    "shadows": [
+      "3D tag contact shadow #3a2412 at 0.4",
+      "Tag drawing drop 0 14px 16px rgb(74 52 33 / 0.25)",
+      "Phone frame drop"
+    ],
+    "motion": [
+      "Hero phone spring stiffness 70 damping 17",
+      "Chip pulse ring 1.5s ease-out cubic",
+      "Page crossfade 700ms expo out",
+      "Reduced motion: no travel"
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      }
+    ]
+  },
+  "components": [
+    "button-primary",
+    "button-secondary",
+    "nav-preorder",
+    "choice-chip",
+    "phone-player",
+    "hero-tap-demo",
+    "frieze",
+    "tap-player"
+  ],
+  "narrative": {
+    "northStar": "The Hafti by the Bed",
+    "overview": "Ivory and paper grounds, umber bands cut with the Fatimi star-and-cross lattice, one gold accent. The 3D tag leads; the real player with real hafti pages and recitation proves it.",
+    "keyCharacteristics": [
+      "Mockup palette: white, beige, cream, brown, gold",
+      "Square corners except play controls, swatches, phones",
+      "Lattice as a CSS mask of one SVG tile",
+      "Frieze strips mark band edges",
+      "Arabic only from verified titles"
+    ],
+    "rules": [
+      "Mockup Palette Rule",
+      "Tag Colours Stay On The Tag Rule",
+      "Verified Arabic Rule",
+      "Insider voice"
+    ],
+    "dos": [
+      "Write from inside the community",
+      "Gold is the only accent",
+      "Lattice top, bottom and behind content",
+      "Draw tags from lib/tag.ts",
+      "Honour reduced motion",
+      "Show missing media plainly"
+    ],
+    "donts": [
+      "No fabricated dua text, attribution or history",
+      "No urgency, invented prices or testimonials",
+      "No eyebrows above headings",
+      "No gradient text, em-dashes or emoji",
+      "No UI shadows or rounded cards",
+      "Do not present recitations as a video feed"
+    ]
+  }
+}
