@@ -99,11 +99,15 @@ function useFaces(c: Colourway, face: TagFace) {
   return faces;
 }
 
-function Tag({ c, face, tapping }: { c: Colourway; face: TagFace; tapping: boolean }) {
+function Tag({ c, face, tapping, onReady }: { c: Colourway; face: TagFace; tapping: boolean; onReady?: () => void }) {
   const group = useRef<THREE.Group>(null);
   const pulse = useRef<THREE.Mesh>(null);
   const tapStart = useRef(-1);
   const faces = useFaces(c, face);
+
+  useEffect(() => {
+    if (faces) onReady?.();
+  }, [faces, onReady]);
 
   const bodyGeo = useMemo(() => {
     const depth = TAG.depth - BEVEL * 2;
@@ -189,7 +193,17 @@ function Tag({ c, face, tapping }: { c: Colourway; face: TagFace; tapping: boole
   );
 }
 
-export default function TagModel({ colourway, face, tapping = false }: { colourway: Colourway; face: TagFace; tapping?: boolean }) {
+export default function TagModel({
+  colourway,
+  face,
+  tapping = false,
+  onReady,
+}: {
+  colourway: Colourway;
+  face: TagFace;
+  tapping?: boolean;
+  onReady?: () => void;
+}) {
   return (
     <Canvas
       shadows
@@ -216,7 +230,7 @@ export default function TagModel({ colourway, face, tapping = false }: { colourw
         polar={[-0.4, 0.4]}
         azimuth={[-Math.PI, Math.PI]}
       >
-        <Tag c={colourway} face={face} tapping={tapping} />
+        <Tag c={colourway} face={face} tapping={tapping} onReady={onReady} />
       </PresentationControls>
       <ContactShadows position={[0, -1.95, 0]} opacity={0.4} scale={6} blur={2.6} far={3} color="#3a2412" />
     </Canvas>

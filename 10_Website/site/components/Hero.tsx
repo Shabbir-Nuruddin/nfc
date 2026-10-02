@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useEffect, useRef, useState } from "react";
+import { Component, useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { HandTap, WhatsappLogo } from "@phosphor-icons/react";
 import { COLOURWAYS, whatsappLink } from "@/lib/site";
@@ -15,17 +15,39 @@ const TagModel = dynamic(() => import("./TagModel"), { ssr: false });
 
 type Phase = "idle" | "approach" | "tapped";
 
+/** If the 3D scene throws, the drawing underneath simply stays. */
+class Quiet extends Component<{ children: React.ReactNode }, { failed: boolean }> {
+  state = { failed: false };
+  static getDerivedStateFromError() {
+    return { failed: true };
+  }
+  render() {
+    return this.state.failed ? null : this.props.children;
+  }
+}
+
+function hasWebGL() {
+  try {
+    const c = document.createElement("canvas");
+    return !!(c.getContext("webgl2") || c.getContext("webgl"));
+  } catch {
+    return false;
+  }
+}
+
 export function Hero() {
   const { colourway, setColourway, face, setFace } = useColourway();
   const [phase, setPhase] = useState<Phase>("idle");
   const [ready, setReady] = useState(false);
+  const [shown, setShown] = useState(false);
+  const onModelReady = useCallback(() => setShown(true), []);
   const [tap, setTap] = useState(0);
   const timers = useRef<number[]>([]);
   const stage = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
 
   useEffect(() => {
-    setReady(true);
+    setReady(hasWebGL());
     return () => timers.current.forEach(clearTimeout);
   }, []);
 
@@ -110,13 +132,19 @@ export function Hero() {
 
         <div ref={stage} className="relative mx-auto aspect-[5/6] w-full max-w-[600px] lg:aspect-auto lg:h-[min(calc(100dvh-8rem),760px)] lg:max-w-none">
           <div className="absolute inset-0 bottom-12">
+            <div
+              className={`flex h-full items-center justify-center transition-opacity duration-700 ${shown ? "opacity-0" : "opacity-100"}`}
+              aria-hidden={shown}
+            >
+              <TagDrawing colourway={colourway} face={face} className="h-[62%] drop-shadow-[0_24px_30px_rgb(58_36_18/0.25)]" />
+            </div>
             {ready ? (
-              <TagModel colourway={colourway} face={face} tapping={phase === "tapped"} />
-            ) : (
-              <div className="flex h-full items-center justify-center">
-                <TagDrawing colourway={colourway} face={face} className="h-[62%]" />
+              <div className={`absolute inset-0 transition-opacity duration-700 ${shown ? "opacity-100" : "opacity-0"}`}>
+                <Quiet>
+                  <TagModel colourway={colourway} face={face} tapping={phase === "tapped"} onReady={onModelReady} />
+                </Quiet>
               </div>
-            )}
+            ) : null}
           </div>
 
           <motion.div
@@ -174,7 +202,7 @@ export function Hero() {
               );
             })}
           </div>
-          <p className="pointer-events-none absolute top-1 right-1 text-xs text-bark/80">Drag to turn it over</p>
+          {shown ? <p className="pointer-events-none absolute top-1 right-1 text-xs text-bark/80">Drag to turn it over</p> : null}
         </div>
       </div>
     </section>
