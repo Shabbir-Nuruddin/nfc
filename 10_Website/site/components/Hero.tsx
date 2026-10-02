@@ -67,8 +67,8 @@ export function Hero() {
   return (
     <section id="top" className="relative isolate overflow-hidden bg-ivory">
       <Lattice className="text-bark/[0.075]" fade="radial-gradient(ellipse 55% 75% at 72% 45%, black 20%, transparent 75%)" />
-      <div className="mx-auto grid max-w-[1320px] grid-cols-1 items-center gap-y-4 px-4 pt-10 pb-16 sm:px-8 lg:min-h-[calc(100dvh-4.5rem)] lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:gap-x-10 lg:py-12">
-        <div className="relative z-10 max-w-[34rem]">
+      <div className="mx-auto grid max-w-[1320px] grid-cols-1 items-center gap-y-4 px-4 pt-10 pb-16 sm:px-8 lg:min-h-[calc(100dvh-4.5rem)] lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:grid-rows-[1fr_auto] lg:gap-x-10 lg:py-12">
+        <div className="relative z-10 max-w-[34rem] lg:self-end">
           <p className="arabic w-fit text-[2.4rem] leading-none font-bold text-gold-deep" lang="ar">
             دعاء
           </p>
@@ -101,36 +101,9 @@ export function Hero() {
             </button>
           </div>
 
-          <div className="mt-10 border-t border-sand-2 pt-6">
-            <p className="text-sm text-bark" id="face-label">
-              The dua on your tag
-            </p>
-            <div className="mt-3 flex flex-wrap gap-1.5" role="radiogroup" aria-labelledby="face-label">
-              {FACES.map((f) => {
-                const on = f.id === face.id;
-                return (
-                  <button
-                    key={f.id}
-                    type="button"
-                    role="radio"
-                    aria-checked={on}
-                    onClick={() => {
-                      setFace(f.id);
-                      setPhase("idle");
-                    }}
-                    className={`border px-3 py-1.5 text-[13px] transition-colors ${
-                      on ? "border-umber bg-umber text-ivory" : "border-sand-2 text-umber-3 hover:border-bark"
-                    }`}
-                  >
-                    {f.title.replace("Dua-e-", "")}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
         </div>
 
-        <div ref={stage} className="relative mx-auto aspect-[5/6] w-full max-w-[600px] lg:aspect-auto lg:h-[min(calc(100dvh-8rem),760px)] lg:max-w-none">
+        <div ref={stage} className="relative mx-auto -mt-2 aspect-[5/6] w-full max-w-[600px] lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:mt-0 lg:aspect-auto lg:h-[min(calc(100dvh-8rem),760px)] lg:max-w-none">
           <div className="absolute inset-0 bottom-12">
             <div
               className={`flex h-full items-center justify-center transition-opacity duration-700 ${shown ? "opacity-0" : "opacity-100"}`}
@@ -203,6 +176,34 @@ export function Hero() {
             })}
           </div>
           {shown ? <p className="pointer-events-none absolute top-1 right-1 text-xs text-bark/80">Drag to turn it over</p> : null}
+        </div>
+
+        <div className="relative z-10 w-full max-w-[34rem] border-t border-sand-2 pt-6 lg:col-start-1 lg:row-start-2 lg:mt-6 lg:self-start">
+          <p className="text-sm text-bark" id="face-label">
+            The dua on your tag
+          </p>
+          <div className="mt-3 flex flex-wrap gap-1.5" role="radiogroup" aria-labelledby="face-label">
+            {FACES.map((f) => {
+              const on = f.id === face.id;
+              return (
+                <button
+                  key={f.id}
+                  type="button"
+                  role="radio"
+                  aria-checked={on}
+                  onClick={() => {
+                    setFace(f.id);
+                    setPhase("idle");
+                  }}
+                  className={`border px-3 py-1.5 text-[13px] transition-colors ${
+                    on ? "border-umber bg-umber text-ivory" : "border-sand-2 text-umber-3 hover:border-bark"
+                  }`}
+                >
+                  {f.title.replace("Dua-e-", "")}
+                </button>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>
